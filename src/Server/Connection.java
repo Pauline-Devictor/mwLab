@@ -1,9 +1,16 @@
 package Server;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class Connection implements IVODService {
+public class Connection extends UnicastRemoteObject implements IVODService, IConnection {
     List<Client> clientlist;
+
+    protected Connection(int numport) throws RemoteException {
+        super(numport);
+    }
+
     public boolean signIn(String mail, String pwd) throws SignInFailed {
         if (mail == null || pwd == null) {
             throw new SignInFailed("Invalid mail or password");
@@ -17,7 +24,8 @@ public class Connection implements IVODService {
         clientlist.add(c);
         return true;
     }
-    public IVODService login(String mail, String pwd) throws InvalidCredentialsException {
+
+    public IVODService login(String mail, String pwd) throws RemoteException, InvalidCredentialsException {
         if (mail == null || pwd == null) {
             throw new InvalidCredentialsException("Invalid mail or password");
         }
