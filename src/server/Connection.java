@@ -8,8 +8,9 @@ import exceptionHelper.*;
 
 
 public class Connection extends UnicastRemoteObject implements  IConnection {
-    List<Client> clientlist = new ArrayList<Client>();
+    List<Client> clientlist = new ArrayList<>();
     private static Connection instance = null;
+
 
     protected Connection(int numport) throws RemoteException {
         super(numport);
