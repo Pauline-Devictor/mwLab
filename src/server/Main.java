@@ -13,10 +13,8 @@ public class Main {
         System.out.println("Server ready");
         reg.rebind("Connection", connection);
 
-      /*  ivodService = VODService.getInstance(1002);
+       /* ivodService = VODService.getInstance(1002);
         reg.rebind("VODService", ivodService);*/
-
-
 
     }
 }

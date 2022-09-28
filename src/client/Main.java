@@ -14,11 +14,10 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) throws NotBoundException, RemoteException, SignInFailed, MalformedURLException, InvalidCredentialsException {
         System.out.println("Hello World!");
-
-    //distance
+        //distance
        /* Registry reg = LocateRegistry.getRegistry("192.168.90.117", 6542);
         IConnection connection= (IConnection)reg.lookup("Connection");*/
-    //local
+        //local
         IConnection connection = (IConnection) Naming.lookup("rmi://localhost:2001/Connection");
 
         System.out.println("Bob will have a new account");
@@ -33,7 +32,7 @@ public class Main {
             try {
                 signedIn = connection.signIn(mail,pwd);
             } catch (SignInFailed signInFailed) {
-                System.out.println("Invalid mail or password");
+                System.out.println(signInFailed.getMessage());
             }
         }
 
@@ -45,21 +44,21 @@ public class Main {
 
         System.out.println("Then ..... Let's try to login ! ");
         IVODService ivodService = null;
-        while (true){
+  /*      while (true){
             try{
                 System.out.println("Please enter your mail");
                 mail = scanner.nextLine();
                 System.out.println("Please enter your password");
                 pwd = scanner.nextLine();
                 ivodService = (IVODService) connection.login(mail, pwd);
-            }catch (Exception e){
-                System.out.println("Invalid mail or password");
+            }catch (InvalidCredentialsException e){
+                System.out.println(e.getMessage());
             }
             if (ivodService != null){
                 break;
             }
         }
-        ivodService.viewCatalog();
+        ivodService.viewCatalog();*/
 
 
        // IVODService ivodService = (IVODService) connection.login(mail, pwd);

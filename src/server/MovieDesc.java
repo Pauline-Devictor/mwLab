@@ -4,12 +4,14 @@ public class MovieDesc {
     String movieName;
     String ibsn;
     String synopsis;
+    Bill bill;
 
 
-    public MovieDesc(String movieName, String ibsn, String synopsis) {
+    public MovieDesc(String movieName, String ibsn, String synopsis, Bill bill) {
         this.movieName = movieName;
         this.ibsn = ibsn;
         this.synopsis = synopsis;
+        this.bill = bill;
     }
 
     @Override
@@ -43,5 +45,13 @@ public class MovieDesc {
 
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
+    }
+
+    public Bill getBill() {
+        return bill;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
     }
 }
