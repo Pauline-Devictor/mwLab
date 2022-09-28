@@ -40,10 +40,28 @@ public class Main {
         System.out.println("Let's try to signIn again ! ");
         try{connection.signIn(mail, pwd);}
         catch (Exception e){
-            System.out.println("Ooooops Bob already have an account with his mail = 'Bob.gmail'");
+            System.out.println("Ooooops there's already an account for mail : '"+mail+"'");
         }
 
-        System.out.println("Let's try to login ! ");
+        System.out.println("Then ..... Let's try to login ! ");
+        IVODService ivodService = null;
+        while (true){
+            try{
+                System.out.println("Please enter your mail");
+                mail = scanner.nextLine();
+                System.out.println("Please enter your password");
+                pwd = scanner.nextLine();
+                ivodService = (IVODService) connection.login(mail, pwd);
+            }catch (Exception e){
+                System.out.println("Invalid mail or password");
+            }
+            if (ivodService != null){
+                break;
+            }
+        }
+        ivodService.viewCatalog();
+
+
        // IVODService ivodService = (IVODService) connection.login(mail, pwd);
 
     }
