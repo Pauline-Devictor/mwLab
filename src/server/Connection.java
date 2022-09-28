@@ -5,9 +5,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import exceptionHelper.*;
+import interfaces.IConnection;
+import interfaces.IVODService;
 
 
-public class Connection extends UnicastRemoteObject implements  IConnection {
+public class Connection extends UnicastRemoteObject implements IConnection {
     List<Client> clientlist = new ArrayList<>();
     private static Connection instance = null;
 
@@ -43,7 +45,7 @@ public class Connection extends UnicastRemoteObject implements  IConnection {
         }
         for (Client client : clientlist){
             if (client.getmail().equals(mail) && client.getpwd().equals(pwd)) {
-                return new VODService(1002);
+                return VODService.getInstance(1002);
             }
         }
         throw new InvalidCredentialsException("Invalid mail or password");

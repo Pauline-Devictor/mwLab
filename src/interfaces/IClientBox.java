@@ -1,4 +1,4 @@
-package server;
+package interfaces;
 
 public interface IClientBox {
     void playMovie(byte[] movie);

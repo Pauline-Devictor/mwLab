@@ -1,5 +1,8 @@
 package server;
 
+import interfaces.IConnection;
+import interfaces.IVODService;
+
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -13,8 +16,8 @@ public class Main {
         System.out.println("Server ready");
         reg.rebind("Connection", connection);
 
-       /* ivodService = VODService.getInstance(1002);
-        reg.rebind("VODService", ivodService);*/
+        ivodService = VODService.getInstance(1002);
+        reg.rebind("VODService", ivodService);
 
     }
 }

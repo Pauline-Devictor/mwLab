@@ -1,5 +1,8 @@
 package server;
 
+import interfaces.IClientBox;
+import interfaces.IVODService;
+
 import java.math.BigInteger;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -21,6 +24,7 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         }
         return instance;
     }
+
     public List<MovieDesc> viewCatalog() {
         return catalog;
     }

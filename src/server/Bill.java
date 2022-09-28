@@ -1,8 +1,9 @@
 package server;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
-public class Bill {
+public class Bill implements Serializable {
     String movieName;
     BigInteger outrageousPrice; //(<--it mays not be that big)
 

@@ -1,8 +1,10 @@
 package client;
 
 import exceptionHelper.InvalidCredentialsException;
-import server.IConnection;
+import interfaces.IConnection;
+import interfaces.IVODService;
 import exceptionHelper.SignInFailed;
+import server.MovieDesc;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -44,7 +46,7 @@ public class Main {
 
         System.out.println("Then ..... Let's try to login ! ");
         IVODService ivodService = null;
-  /*      while (true){
+        while (true){
             try{
                 System.out.println("Please enter your mail");
                 mail = scanner.nextLine();
@@ -58,10 +60,8 @@ public class Main {
                 break;
             }
         }
-        ivodService.viewCatalog();*/
 
-
-       // IVODService ivodService = (IVODService) connection.login(mail, pwd);
+        System.out.println(ivodService.viewCatalog().toString());
 
     }
 
