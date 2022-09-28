@@ -2,15 +2,24 @@ package server;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 import exceptionHelper.*;
 
 
 public class Connection extends UnicastRemoteObject implements IVODService, IConnection {
-    List<Client> clientlist;
+    List<Client> clientlist = new ArrayList<Client>();
+    private static Connection instance = null;
 
     protected Connection(int numport) throws RemoteException {
         super(numport);
+    }
+
+    public static IConnection getInstance(int numport) throws RemoteException {
+        if (instance == null) {
+            instance = new Connection(numport);
+        }
+        return instance;
     }
 
     public boolean signIn(String mail, String pwd) throws SignInFailed {
