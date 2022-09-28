@@ -1,4 +1,4 @@
-package Server;
+package server;
 
 public class Client {
     private String mail;

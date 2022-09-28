@@ -1,8 +1,10 @@
-package Server;
+package server;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+import exceptionHelper.*;
+
 
 public class Connection extends UnicastRemoteObject implements IVODService, IConnection {
     List<Client> clientlist;

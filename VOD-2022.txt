@@ -4,7 +4,7 @@ The client should to be able to signin  (create an account) and login (connect t
 
 Once the server is launched, you can't restart it for your tests, otherwise clients' credentials would be lost ! BONUS points will be given if you save credentials in a file (server-side) and read that file whenever the server is launched, so you could stop and restart your server without losing data.
 
-The client connects to the VOD platform by submitting its credentials. If they are not recognized at the server side, an Exception is returned.
+The client connects to the VOD platform by submitting its credentials. If they are not recognized at the server side, an exceptionHelper is returned.
 Managing errors is not the purpose of this lab, but BONUS points will be offered if in the client code, you catch and manage connection exceptions (write a message in the client console and asks the user to re-enter the credentials, both for signin and login).
 If recognized by the server, a stub to the private part of the VOD platform is returned.
 

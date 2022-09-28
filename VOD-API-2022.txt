@@ -1,4 +1,4 @@
-Server side
+server side
 	Connection :
 		Array clientList;
 		boolean signIn (String mail, String pwd) throws SignInFailed; (eg, if a client with this email already exists)
@@ -17,7 +17,7 @@ Server side
 	MovieDescExtended extends MovieDesc :
 		String synopsis;
 		[]bytes teaser;
-Client side
+client side
 	ClientBox :
 		void stream([]bytes chunck);
 Flow
