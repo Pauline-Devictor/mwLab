@@ -1,7 +1,14 @@
 package Server;
 
+import java.util.List;
+
 public class VODService implements IVODService {
-    List<MovieDesc> viewCatalog();
-    Bill playmovie(String isbn, IClientBox box);
+    public List<MovieDesc> viewCatalog() {
+        return null;
+    }
+
+    public Bill playmovie(String isbn, IClientBox box) {
+        return null;
+    }
 
 }
