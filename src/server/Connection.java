@@ -7,7 +7,7 @@ import java.util.List;
 import exceptionHelper.*;
 
 
-public class Connection extends UnicastRemoteObject implements IVODService, IConnection {
+public class Connection extends UnicastRemoteObject implements  IConnection {
     List<Client> clientlist = new ArrayList<Client>();
     private static Connection instance = null;
 
@@ -42,19 +42,9 @@ public class Connection extends UnicastRemoteObject implements IVODService, ICon
         }
         for (Client client : clientlist){
             if (client.getmail().equals(mail) && client.getpwd().equals(pwd)) {
-                return this;
+                return new VODService(1002);
             }
         }
         throw new InvalidCredentialsException("Invalid mail or password");
-    }
-
-    @Override
-    public List<MovieDesc> viewCatalog() {
-        return null;
-    }
-
-    @Override
-    public Bill playmovie(String isbn, IClientBox box) {
-        return null;
     }
 }

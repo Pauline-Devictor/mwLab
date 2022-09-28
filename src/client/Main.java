@@ -1,5 +1,6 @@
 package client;
 
+import exceptionHelper.InvalidCredentialsException;
 import server.Connection;
 import server.IConnection;
 import exceptionHelper.SignInFailed;
@@ -12,13 +13,12 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class Main {
-    public static void main(String[] args) throws NotBoundException, RemoteException, SignInFailed, MalformedURLException {
+    public static void main(String[] args) throws NotBoundException, RemoteException, SignInFailed, MalformedURLException, InvalidCredentialsException {
         System.out.println("Hello World!");
 
     //distance
-      /*  Registry reg = LocateRegistry.getRegistry("192.168.90.117", 2001);
+       /* Registry reg = LocateRegistry.getRegistry("192.168.90.117", 6542);
         IConnection connection= (IConnection)reg.lookup("Connection");*/
-
     //local
         IConnection connection = (IConnection) Naming.lookup("rmi://localhost:2001/Connection");
 
@@ -32,6 +32,10 @@ public class Main {
         catch (Exception e){
             System.out.println("Ooooops Bob already have an account with his mail = 'Bob.gmail'");
         }
+
+        System.out.println("Let's try to login ! ");
+       // IVODService ivodService = (IVODService) connection.login("Bob.gmail", "1234"); //TODO Login qui marche :(
+
     }
 
 }

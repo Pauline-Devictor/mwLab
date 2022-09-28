@@ -1,6 +1,13 @@
 package client;
 
+import server.Bill;
+import server.IClientBox;
+import server.MovieDesc;
+
+import java.util.List;
+
 public interface IVODService extends java.rmi.Remote {
-    public void playmovie(String isbn, IClientBox box) throws java.rmi.RemoteException;
+    List<MovieDesc> viewCatalog();
+    Bill playmovie(String isbn, IClientBox box);
 }
 
