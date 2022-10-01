@@ -1,6 +1,5 @@
 package server;
 
-import exceptionHelper.InvalidIsbnException;
 import interfaces.IClientBox;
 import interfaces.IVODService;
 
@@ -30,14 +29,7 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         return catalog;
     }
 
-    public Bill playmovie(String isbn, IClientBox box) throws InvalidIsbnException {
-        for (MovieDesc m: catalog) {
-            if(m.getIbsn().equals(isbn)) {
-                byte[] chunk = {1,2,3,4,5}; //provisoire, pour tester
-                box.stream(chunk);
-                return m.getBill();
-            }
-        }
-        throw new InvalidIsbnException(isbn);
+    public Bill playmovie(String isbn, IClientBox box) { //TODO
+        return movie.getBill(); //provisoire, pour tester
     }
 }
