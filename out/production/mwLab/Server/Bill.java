@@ -12,14 +12,6 @@ public class Bill implements Serializable {
         this.outrageousPrice = outrageousPrice;
     }
 
-    @Override
-    public String toString() {
-        return "Bill{" +
-                "movieName='" + movieName + '\'' +
-                ", outrageousPrice='" + outrageousPrice + '\'' +
-                '}';
-    }
-
     public String getMovieName() {
         return movieName;
     }
