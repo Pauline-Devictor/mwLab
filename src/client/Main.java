@@ -6,15 +6,19 @@ import interfaces.IClientBox;
 import interfaces.IConnection;
 import interfaces.IVODService;
 import exceptionHelper.SignInFailed;
+import server.Connection;
 import server.MovieDesc;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.Scanner;
 
 public class Main {
+    public static IClientBox clientBox;
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) throws NotBoundException, RemoteException, SignInFailed, MalformedURLException, InvalidCredentialsException, InvalidIsbnException {
         //System.out.println("Hello World!");
@@ -26,7 +30,8 @@ public class Main {
 
         System.out.println("Let's have a new account");
 
-        IClientBox myBox = new ClientBox();
+
+
         boolean signedIn = false;
         String mail = null;
         String pwd = null;
@@ -64,10 +69,20 @@ public class Main {
                 break;
             }
         }
+
+
+        IClientBox myBox = new ClientBox();
+        Registry reg = LocateRegistry.createRegistry(2002);
+
+        clientBox = ClientBox.getInstance(1003);
+        reg.rebind("ClientBox", clientBox);
+
+
         System.out.println("Now let's see the catalog !");
         System.out.println(ivodService.viewCatalog());
-        System.out.println("And now let's try to see a film !");
+        System.out.println("And now let's try to rent a movie !");
         System.out.println(ivodService.playmovie("14325426235324-2132", myBox));
+        reg.unbind("ClientBox");
     }
 
 }

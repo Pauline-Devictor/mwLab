@@ -1,6 +1,5 @@
 package interfaces;
 import exceptionHelper.*;
-import interfaces.IVODService;
 
 import java.rmi.Remote;
 

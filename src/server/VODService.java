@@ -14,9 +14,12 @@ public class VODService extends UnicastRemoteObject implements IVODService {
     List<MovieDesc> catalog = new ArrayList<>();
     private static VODService instance = null;
     MovieDesc movie = new MovieDesc("Jesuisunfilm","14325426235324-2132","JESUISLEDETAILDUFILM",new Bill("Jesuisunfilm", new BigInteger(String.valueOf(11213141))));
+    MovieDesc movie2 = new MovieDesc("AAAAAAA","12-2132","ADETAILS",new Bill("AAAAAAA", new BigInteger(String.valueOf(11213141))));
+
     public VODService(int numport) throws RemoteException {
         super(numport);
         catalog.add(movie);
+        catalog.add(movie2);
     }
 
     public static IVODService getInstance(int numport) throws RemoteException {
@@ -30,7 +33,7 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         return catalog;
     }
 
-    public Bill playmovie(String isbn, IClientBox box) throws InvalidIsbnException {
+    public Bill playmovie(String isbn, IClientBox box) throws InvalidIsbnException, RemoteException {
         for (MovieDesc m: catalog) {
             if(m.getIbsn().equals(isbn)) {
                 byte[] chunk = {1,2,3,4,5}; //provisoire, pour tester

@@ -3,8 +3,25 @@ package client;
 import interfaces.IClientBox;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class ClientBox implements IClientBox, Serializable {
+public class ClientBox extends UnicastRemoteObject implements IClientBox, Serializable {
+
+    private static ClientBox instance = null;
+    protected ClientBox() throws RemoteException {
+    }
+
+    protected ClientBox(int port) throws RemoteException {
+        super(port);
+    }
+
+    public static IClientBox getInstance(int numport) throws RemoteException {
+        if (instance == null) {
+            instance = new ClientBox(numport);
+        }
+        return instance;
+    }
     @Override
     public void stream(byte[] chunk) {
         for (byte b: chunk) {
