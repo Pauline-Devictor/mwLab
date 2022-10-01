@@ -29,31 +29,14 @@ public class MovieDesc implements Serializable {
         return movieName;
     }
 
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
-    }
-
     public String getIbsn() {
         return ibsn;
     }
-
-    public void setIbsn(String ibsn) {
-        this.ibsn = ibsn;
-    }
-
     public String getSynopsis() {
         return synopsis;
     }
 
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
-    }
-
     public Bill getBill() {
         return bill;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
     }
 }

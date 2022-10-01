@@ -27,6 +27,6 @@ public class ClientBox extends UnicastRemoteObject implements IClientBox, Serial
         for (byte b: chunk) {
             System.out.print(b);
         }
-        System.out.println("");
+        System.out.println();
     }
 }

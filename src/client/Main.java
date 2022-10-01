@@ -6,8 +6,6 @@ import interfaces.IClientBox;
 import interfaces.IConnection;
 import interfaces.IVODService;
 import exceptionHelper.SignInFailed;
-import server.Connection;
-import server.MovieDesc;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -21,7 +19,6 @@ public class Main {
     public static IClientBox clientBox;
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) throws NotBoundException, RemoteException, SignInFailed, MalformedURLException, InvalidCredentialsException, InvalidIsbnException {
-        //System.out.println("Hello World!");
         //distance
        /* Registry reg = LocateRegistry.getRegistry("192.168.90.117", 6542);
         IConnection connection= (IConnection)reg.lookup("Connection");*/
@@ -29,8 +26,6 @@ public class Main {
         IConnection connection = (IConnection) Naming.lookup("rmi://localhost:2001/Connection");
 
         System.out.println("Let's have a new account");
-
-
 
         boolean signedIn = false;
         String mail = null;
@@ -55,20 +50,17 @@ public class Main {
 
         System.out.println("Then ..... Let's try to login ! ");
         IVODService ivodService = null;
-        while (true){
-            try{
+        do {
+            try {
                 System.out.println("Please enter your mail");
                 mail = scanner.nextLine();
                 System.out.println("Please enter your password");
                 pwd = scanner.nextLine();
-                ivodService = (IVODService) connection.login(mail, pwd);
-            }catch (InvalidCredentialsException e){
+                ivodService = connection.login(mail, pwd);
+            } catch (InvalidCredentialsException e) {
                 System.out.println(e.getMessage());
             }
-            if (ivodService != null){
-                break;
-            }
-        }
+        } while (ivodService == null);
 
 
         IClientBox myBox = new ClientBox();

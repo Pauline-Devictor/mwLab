@@ -1,8 +1,8 @@
 package server;
 
 public class Client {
-    private String mail;
-    private String pwd;
+    private final String mail;
+    private final String pwd;
     public Client(String mail, String pwd) {
         this.mail = mail;
         this.pwd = pwd;
