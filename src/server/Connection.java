@@ -31,7 +31,7 @@ public class Connection extends UnicastRemoteObject implements IConnection {
         }
         for (Client client : clientlist) {
             if (client.getmail().equals(mail)) {
-                throw new SignInFailed("Mail already in use");
+                throw new SignInFailed("Mail \""+client.getmail()+"\" already in use");
             }
         }
         Client c = new Client(mail,pwd);

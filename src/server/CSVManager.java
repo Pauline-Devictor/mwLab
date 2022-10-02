@@ -35,7 +35,7 @@ public class CSVManager {
             csvWriter.append("\n");
             csvWriter.flush();
             csvWriter.close();
-            System.out.println("Le client a bien été ajouté au fichier CSV");
+            System.out.println("Le client \""+client.getmail()+"\" a bien été ajouté au fichier CSV");
         } catch (IOException e) {
             e.printStackTrace();
         }

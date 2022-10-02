@@ -16,11 +16,13 @@ public class VODService extends UnicastRemoteObject implements IVODService {
     private static VODService instance = null;
     MovieDesc movie = new MovieDesc("Jesuisunfilm","14325426235324-2132","JESUISLEDETAILDUFILM",new Bill("Jesuisunfilm", new BigInteger(String.valueOf(11213141))));
     MovieDesc movie2 = new MovieDesc("AAAAAAA","12-2132","ADETAILS",new Bill("AAAAAAA", new BigInteger(String.valueOf(11213141))));
+    MovieDesc movie3 = new MovieDescExtended("Test","12-2133","synopsis",new Bill("Test", new BigInteger(String.valueOf(1234567))));
 
     public VODService(int numport) throws RemoteException {
         super(numport);
         catalog.add(movie);
         catalog.add(movie2);
+        //catalog.add(movie3);
     }
 
     public static IVODService getInstance(int numport) throws RemoteException {
@@ -53,6 +55,6 @@ public class VODService extends UnicastRemoteObject implements IVODService {
                 return m.getBill();
             }
         }
-        throw new InvalidIsbnException(isbn);
+        throw new InvalidIsbnException("Movie not found with isbn : "+isbn);
     }
 }

@@ -22,7 +22,7 @@ public class MovieDesc implements Serializable {
                 "movieName='" + movieName + '\'' +
                 ", ibsn='" + ibsn + '\'' +
                 ", synopsis='" + synopsis + '\'' +
-                '}';
+                "}\n";
     }
 
     public String getMovieName() {
