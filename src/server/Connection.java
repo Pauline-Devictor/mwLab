@@ -13,8 +13,6 @@ import interfaces.IVODService;
 public class Connection extends UnicastRemoteObject implements IConnection {
     List<Client> clientlist = new ArrayList<>();
     private static Connection instance = null;
-    private static CSVManager csvManager;
-
 
     protected Connection(int numport) throws RemoteException {
         super(numport);
@@ -27,7 +25,7 @@ public class Connection extends UnicastRemoteObject implements IConnection {
         return instance;
     }
 
-    public boolean signIn(String mail, String pwd) throws SignInFailed, IOException {
+    public boolean signIn(String mail, String pwd) throws SignInFailed {
         if (mail == null || pwd == null) {
             throw new SignInFailed("Invalid mail or password");
         }
