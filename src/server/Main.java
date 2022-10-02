@@ -9,6 +9,7 @@ import java.rmi.registry.Registry;
 public class Main {
     public static IConnection connection;
     public static IVODService ivodService;
+    public static CSVManager csvManager = new CSVManager();
     public static void main(String[] args) throws RemoteException {
         Registry reg = LocateRegistry.createRegistry(2001);
 
@@ -19,5 +20,6 @@ public class Main {
         ivodService = VODService.getInstance(1002);
         reg.rebind("VODService", ivodService);
 
+        csvManager.readClientData(connection);
     }
 }

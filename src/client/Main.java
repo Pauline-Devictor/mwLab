@@ -7,6 +7,7 @@ import interfaces.IConnection;
 import interfaces.IVODService;
 import exceptionHelper.SignInFailed;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -37,7 +38,7 @@ public class Main {
             pwd = scanner.nextLine();
             try {
                 signedIn = connection.signIn(mail,pwd);
-            } catch (SignInFailed signInFailed) {
+            } catch (SignInFailed | IOException signInFailed) {
                 System.out.println(signInFailed.getMessage());
             }
         }

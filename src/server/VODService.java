@@ -8,6 +8,7 @@ import java.math.BigInteger;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class VODService extends UnicastRemoteObject implements IVODService {
@@ -33,11 +34,22 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         return catalog;
     }
 
-    public Bill playmovie(String isbn, IClientBox box) throws InvalidIsbnException, RemoteException {
+    synchronized public Bill playmovie(String isbn, IClientBox box) throws InvalidIsbnException, RemoteException {
         for (MovieDesc m: catalog) {
             if(m.getIbsn().equals(isbn)) {
-                byte[] chunk = {1,2,3,4,5}; //provisoire, pour tester
-                box.stream(chunk);
+                byte[] chunk = {1,2,3,4,5,'a', 'b', 'c', 'd', 'e',1, 'a', 2, 'b', 3}; //provisoire, pour tester
+                for(int i =0;i<3;i++) {
+                    int finalI = i;
+                    new Thread(() -> {
+                        try {
+                            //Pour simuler le chargement du film
+                            byte[] a = Arrays.copyOfRange(chunk, finalI *chunk.length/3, Math.min(chunk.length/3* (finalI +1), chunk.length));
+                            box.stream(a);
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                    }).start();
+                }
                 return m.getBill();
             }
         }

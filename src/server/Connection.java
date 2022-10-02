@@ -1,5 +1,6 @@
 package server;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import interfaces.IVODService;
 public class Connection extends UnicastRemoteObject implements IConnection {
     List<Client> clientlist = new ArrayList<>();
     private static Connection instance = null;
+    private static CSVManager csvManager;
 
 
     protected Connection(int numport) throws RemoteException {
@@ -25,7 +27,7 @@ public class Connection extends UnicastRemoteObject implements IConnection {
         return instance;
     }
 
-    public boolean signIn(String mail, String pwd) throws SignInFailed {
+    public boolean signIn(String mail, String pwd) throws SignInFailed, IOException {
         if (mail == null || pwd == null) {
             throw new SignInFailed("Invalid mail or password");
         }
@@ -36,6 +38,7 @@ public class Connection extends UnicastRemoteObject implements IConnection {
         }
         Client c = new Client(mail,pwd);
         clientlist.add(c);
+        Main.csvManager.writeClientData(c);
         return true;
     }
 
@@ -49,5 +52,9 @@ public class Connection extends UnicastRemoteObject implements IConnection {
             }
         }
         throw new InvalidCredentialsException("Invalid mail or password");
+    }
+
+    public void addClient(Client c) throws java.rmi.RemoteException {
+        clientlist.add(c);
     }
 }
