@@ -22,7 +22,7 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         super(numport);
         catalog.add(movie);
         catalog.add(movie2);
-        //catalog.add(movie3);
+        catalog.add(movie3);
     }
 
     public static IVODService getInstance(int numport) throws RemoteException {

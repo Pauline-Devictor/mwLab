@@ -6,7 +6,7 @@ public class MovieDescExtended extends MovieDesc{
 
     public MovieDescExtended(String movieName, String ibsn, String synopsis, Bill bill) {
         super(movieName, ibsn, synopsis, bill);
-        teaser = new byte[]{1, 2, 3, 4, 5, 'a', 'b', 'c', 'd', 'e', 1, 'a', 2, 'b', 3}; //provisoire, pour tester
+        teaser = new byte[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}; //provisoire, pour tester
     }
 
     @Override
