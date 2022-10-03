@@ -37,7 +37,7 @@ public class Main {
         reg.rebind("ClientBox", clientBox);
         boolean stop = false;
         while(!stop){
-            System.out.println("Do you want to see the catalog (1), to rent a movie (2), or to quit (0) ?");
+            System.out.println("Do you want to see the catalog (1), to rent a movie (2), to add a movie (3), or to quit (0) ?");
             String choice = scanner.nextLine();
             if (choice.equals("1")) {
                 System.out.println("Now let's see the catalog !");
@@ -47,6 +47,16 @@ public class Main {
                 String isbn = scanner.nextLine();
                 //String isbn = "14325426235324-2132";
                 System.out.println(ivodService.playmovie(isbn, myBox));
+            } else if (choice.equals("3")) {
+                System.out.println("Please enter the name of the movie");
+                String name = scanner.nextLine();
+                System.out.println("Please enter the isbn of the movie");
+                String isbn = scanner.nextLine();
+                System.out.println("Please enter the synopsis of the movie");
+                String synopsis = scanner.nextLine();
+                System.out.println("Please enter the price of the movie");
+                String price = scanner.nextLine();
+                ivodService.addmovie(name, isbn,synopsis, price);
             } else if (choice.equals("0")) {
                 stop = true;
             }

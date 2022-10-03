@@ -5,7 +5,7 @@ import interfaces.IClientBox;
 import java.rmi.RemoteException;
 
 public class MovieDescExtended extends MovieDesc{
-    String synopsis;
+    //String synopsis;
     byte[] teaser;
 
     public MovieDescExtended(String movieName, String ibsn, String synopsis, Bill bill) {
