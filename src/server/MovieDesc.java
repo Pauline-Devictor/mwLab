@@ -1,6 +1,9 @@
 package server;
 
+import interfaces.IClientBox;
+
 import java.io.Serializable;
+import java.rmi.RemoteException;
 
 public class MovieDesc implements Serializable {
     String movieName;
@@ -16,13 +19,17 @@ public class MovieDesc implements Serializable {
         this.bill = bill;
     }
 
+    public String toString(IClientBox box) throws RemoteException {
+        return toString();
+    }
+
     @Override
-    public String toString() {
-        return "MovieDesc{" +
+    public String toString(){
+        return "\nMovieDesc{" +
                 "movieName='" + movieName + '\'' +
                 ", ibsn='" + ibsn + '\'' +
                 ", synopsis='" + synopsis + '\'' +
-                "}\n";
+                "}";
     }
 
     public String getMovieName() {

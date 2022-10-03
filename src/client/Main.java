@@ -6,7 +6,6 @@ import interfaces.IClientBox;
 import interfaces.IConnection;
 import interfaces.IVODService;
 import exceptionHelper.SignInFailed;
-import server.Connection;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -36,22 +35,25 @@ public class Main {
 
         clientBox = ClientBox.getInstance(1003);
         reg.rebind("ClientBox", clientBox);
-        String choice = null;
-        while(choice != "0"){
+        boolean stop = false;
+        while(!stop){
             System.out.println("Do you want to see the catalog (1), to rent a movie (2), or to quit (0) ?");
-            choice = scanner.nextLine();
+            String choice = scanner.nextLine();
             if (choice.equals("1")) {
                 System.out.println("Now let's see the catalog !");
-                System.out.println(ivodService.viewCatalog());
+                System.out.println(ivodService.viewCatalog(myBox));
             } else if (choice.equals("2")) {
                 System.out.println("And now let's try to rent a movie ! Enter the ISBN of the movie :");
                 String isbn = scanner.nextLine();
                 //String isbn = "14325426235324-2132";
                 System.out.println(ivodService.playmovie(isbn, myBox));
+            } else if (choice.equals("0")) {
+                stop = true;
             }
         }
 
         reg.unbind("ClientBox");
+        System.out.println("End of the client connection");
     }
 
     private static IVODService connection(IConnection connection) {
