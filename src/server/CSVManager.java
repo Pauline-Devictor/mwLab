@@ -1,5 +1,6 @@
 package server;
 
+import exceptionHelper.InvalidIsbnException;
 import interfaces.IConnection;
 import interfaces.IVODService;
 
@@ -44,6 +45,8 @@ public class CSVManager {
         catch (IOException e)
         {
             e.printStackTrace();
+        } catch (InvalidIsbnException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -67,7 +70,7 @@ public class CSVManager {
             FileWriter csvWriter = new FileWriter("./src/Database/MovieData.csv", true);
             csvWriter.append(movie.getMovieName());
             csvWriter.append(",");
-            csvWriter.append(movie.getIbsn());
+            csvWriter.append(movie.getIsbn());
             csvWriter.append(",");
             csvWriter.append(movie.getSynopsis());
             csvWriter.append(",");

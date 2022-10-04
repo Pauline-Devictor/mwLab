@@ -1,6 +1,6 @@
 package server;
 
-import interfaces.IClientBox;
+import exceptionHelper.InvalidIsbnException;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -8,21 +8,29 @@ import java.rmi.RemoteException;
 
 public class MovieDesc implements Serializable {
     String movieName;
-    String ibsn;
+    String isbn;
     String synopsis;
     Bill bill;
 
 
-    public MovieDesc(String movieName, String ibsn, String synopsis, Bill bill) {
+    public MovieDesc(String movieName, String isbn, String synopsis, Bill bill) throws InvalidIsbnException {
         this.movieName = movieName;
-        this.ibsn = ibsn;
+        long count = isbn.chars().filter(ch -> ch == '-').count();
+        String isbnNb = isbn.replace("-","");
+        if((count != 5) || (isbnNb.length() != 13) || (!isbnNb.chars().allMatch(Character::isDigit)))
+            throw new InvalidIsbnException(isbn);
+        this.isbn = isbn;
         this.synopsis = synopsis;
         this.bill = bill;
     }
 
-    public MovieDesc(String movieName, String ibsn, String synopsis, String price) {
+    public MovieDesc(String movieName, String isbn, String synopsis, String price) throws InvalidIsbnException {
         this.movieName = movieName;
-        this.ibsn = ibsn;
+        long count = isbn.chars().filter(ch -> ch == '-').count();
+        String isbnNb = isbn.replace("-","");
+        if((count != 5) || (isbnNb.length() != 13) || (!isbnNb.chars().allMatch(Character::isDigit)))
+            throw new InvalidIsbnException(isbn);
+        this.isbn = isbn;
         this.synopsis = synopsis;
         this.bill = new Bill(movieName, new BigInteger(price));
     }
@@ -31,13 +39,13 @@ public class MovieDesc implements Serializable {
     public String toString(){
         return "\nMovieDesc{" +
                 "movieName='" + movieName + '\'' +
-                ", ibsn='" + ibsn + '\'' +
+                ", isbn='" + isbn + '\'' +
                 "}";
     }
     public String toStringDetails() throws RemoteException {
         return "\nMovieDesc{" +
                 "movieName='" + movieName + '\'' +
-                ", ibsn='" + ibsn + '\'' +
+                ", isbn='" + isbn + '\'' +
                 ", synopsis='" + synopsis + '\'' +
                 "}";
     }
@@ -46,8 +54,8 @@ public class MovieDesc implements Serializable {
         return movieName;
     }
 
-    public String getIbsn() {
-        return ibsn;
+    public String getIsbn() {
+        return isbn;
     }
     public String getSynopsis() {
         return synopsis;

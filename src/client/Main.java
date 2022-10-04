@@ -60,7 +60,14 @@ public class Main {
                 String synopsis = scanner.nextLine();
                 System.out.println("Please enter the price of the movie");
                 String price = scanner.nextLine();
-                ivodService.addmovie(name, isbn, synopsis, price);
+                System.out.println("Do you have a teaser for this movie ? (Y/n)");
+                String rep = scanner.nextLine();
+                if(rep.equals("Y")){
+                    System.out.println("Please enter the teaser of the movie");
+                    String teaser = scanner.nextLine();
+                    ivodService.addmovie(name, isbn, synopsis, price, teaser);
+                } else
+                    ivodService.addmovie(name, isbn, synopsis, price);
             }
             else if(choice.equals("0")) stop = true;
             }

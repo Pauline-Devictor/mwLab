@@ -1,20 +1,18 @@
 package server;
 
-import interfaces.IClientBox;
-
-import java.rmi.RemoteException;
+import exceptionHelper.InvalidIsbnException;
 
 public class MovieDescExtended extends MovieDesc{
     //String synopsis;
     byte[] teaser;
 
-    public MovieDescExtended(String movieName, String ibsn, String synopsis, Bill bill) {
-        super(movieName, ibsn, synopsis, bill);
+    public MovieDescExtended(String movieName, String isbn, String synopsis, Bill bill) throws InvalidIsbnException {
+        super(movieName, isbn, synopsis, bill);
         teaser = new byte[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     }
 
-    public MovieDescExtended(String movieName, String ibsn, String synopsis, String price, String teaser) {
-        super(movieName, ibsn, synopsis, price);
+    public MovieDescExtended(String movieName, String isbn, String synopsis, String price, String teaser) throws InvalidIsbnException {
+        super(movieName, isbn, synopsis, price);
         this.teaser = teaser.getBytes();
     }
 
@@ -22,7 +20,7 @@ public class MovieDescExtended extends MovieDesc{
     public String toString(){
         return "\nMovieDesc{" +
                 "movieName='" + movieName + '\'' +
-                ", ibsn='" + ibsn + '\'' +
+                ", isbn='" + isbn + '\'' +
                 "}";
     }
 }

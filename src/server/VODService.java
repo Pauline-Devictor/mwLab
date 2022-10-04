@@ -25,11 +25,6 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         catalog.add(movie);
     }
 
-    public void addMovie(MovieDesc movie) throws RemoteException {
-        Main.csvManager.writeMovieData(movie);
-        catalog.add(movie);
-    }
-
     public static IVODService getInstance(int numport) throws RemoteException {
         if (instance == null) {
             instance = new VODService(numport);
@@ -43,7 +38,7 @@ public class VODService extends UnicastRemoteObject implements IVODService {
 
     synchronized public Bill playmovie(String isbn, IClientBox box) throws InvalidIsbnException, RemoteException {
         for (MovieDesc m: catalog) {
-            if(m.getIbsn().equals(isbn)) {
+            if(m.getIsbn().equals(isbn)) {
                 byte[] chunk = {1,2,3,4,5,'a', 'b', 'c', 'd', 'e',1, 'a', 2, 'b', 3}; //Simulation de la lecture du fichier
                 for(int i =0;i<3;i++) {
                     int finalI = i;
@@ -64,16 +59,25 @@ public class VODService extends UnicastRemoteObject implements IVODService {
     }
 
     @Override
-    public boolean addmovie(String name, String isbn, String synopsis, String price) throws RemoteException {
-        MovieDesc newMovie = new MovieDesc(name, isbn, synopsis, new Bill(name, new BigInteger(price)));
-        addMovie(newMovie);
+    public boolean addmovie(String name, String isbn, String synopsis, String price) throws RemoteException, InvalidIsbnException {
+        MovieDesc movie = new MovieDesc(name, isbn, synopsis, new Bill(name, new BigInteger(price)));
+        Main.csvManager.writeMovieData(movie);
+        catalog.add(movie);
+        return true;
+    }
+
+    @Override
+    public boolean addmovie(String name, String isbn, String synopsis, String price, String teaser) throws RemoteException, InvalidIsbnException {
+        MovieDesc movie = new MovieDescExtended(name, isbn, synopsis, price, teaser);
+        Main.csvManager.writeMovieData(movie);
+        catalog.add(movie);
         return true;
     }
 
     @Override
     public void getMovieDetails(String isbn, IClientBox box) throws RemoteException, InvalidIsbnException {
         for (MovieDesc m: catalog) {
-            if(m.getIbsn().equals(isbn)) {
+            if(m.getIsbn().equals(isbn)) {
                 box.printInfos(m.toStringDetails());
                 if (m instanceof MovieDescExtended) {
                     int launchTeaser = r.nextInt(2);
