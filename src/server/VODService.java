@@ -32,7 +32,10 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         return instance;
     }
 
-    public List<MovieDesc> viewCatalog() {
+    public List<MovieDesc> viewCatalog(IClientBox box) throws RemoteException {
+        for (MovieDesc movie: catalog) {
+            System.out.println(movie.toString(box));
+        }
         return catalog;
     }
 
@@ -56,5 +59,12 @@ public class VODService extends UnicastRemoteObject implements IVODService {
             }
         }
         throw new InvalidIsbnException("Movie not found with isbn : "+isbn);
+    }
+
+    @Override
+    public boolean addmovie(String name, String isbn, String synopsis, String price) throws RemoteException {
+        MovieDesc newMovie = new MovieDesc(name, isbn, synopsis, new Bill(name, new BigInteger(price)));
+        catalog.add(newMovie);
+        return true;
     }
 }
