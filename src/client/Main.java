@@ -39,33 +39,31 @@ public class Main {
         while(!stop){
             System.out.println("Do you want to see the catalog (1), to rent a movie (2), to add a movie (3), or to quit (0) ?");
             String choice = scanner.nextLine();
-            switch (choice) {
-                case "1" -> {
-                    System.out.println("Now let's see the catalog !");
-                    System.out.println(ivodService.viewCatalog());
-                }
-                case "2" -> {
-                    System.out.println("And now let's try to rent a movie ! Enter the ISBN of the movie :");
-                    String isbn = scanner.nextLine();
-                    //String isbn = "14325426235324-2132";
-                    watchDetails(ivodService, clientBox, isbn);
-                    System.out.println("Here is the movie :");
-                    watchMovie(ivodService, clientBox, isbn);
-                }
-                case "3" -> {
-                    System.out.println("Please enter the name of the movie");
-                    String name = scanner.nextLine();
-                    System.out.println("Please enter the isbn of the movie");
-                    String isbn = scanner.nextLine();
-                    System.out.println("Please enter the synopsis of the movie");
-                    String synopsis = scanner.nextLine();
-                    System.out.println("Please enter the price of the movie");
-                    String price = scanner.nextLine();
-                    ivodService.addmovie(name, isbn, synopsis, price);
-                }
-                case "0" -> stop = true;
+            if (choice.equals("1")){
+                System.out.println("Now let's see the catalog !");
+                System.out.println(ivodService.viewCatalog());
             }
-        }
+            else if (choice.equals("2")){
+                System.out.println("And now let's try to rent a movie ! Enter the ISBN of the movie :");
+                String isbn = scanner.nextLine();
+                //String isbn = "14325426235324-2132";
+                watchDetails(ivodService, clientBox, isbn);
+                System.out.println("Here is the movie :");
+                watchMovie(ivodService, clientBox, isbn);
+            }
+            else if (choice.equals("3")){
+                System.out.println("Please enter the name of the movie");
+                String name = scanner.nextLine();
+                System.out.println("Please enter the isbn of the movie");
+                String isbn = scanner.nextLine();
+                System.out.println("Please enter the synopsis of the movie");
+                String synopsis = scanner.nextLine();
+                System.out.println("Please enter the price of the movie");
+                String price = scanner.nextLine();
+                ivodService.addmovie(name, isbn, synopsis, price);
+            }
+            else if(choice.equals("0")) stop = true;
+            }
 
         reg.unbind("ClientBox");
         System.out.println("End of the client connection");
