@@ -21,5 +21,6 @@ public class Main {
         reg.rebind("VODService", ivodService);
 
         csvManager.readClientData(connection);
+        csvManager.readMovieData(ivodService);
     }
 }

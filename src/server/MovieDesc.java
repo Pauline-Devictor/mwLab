@@ -3,6 +3,7 @@ package server;
 import interfaces.IClientBox;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.rmi.RemoteException;
 
 public class MovieDesc implements Serializable {
@@ -17,6 +18,13 @@ public class MovieDesc implements Serializable {
         this.ibsn = ibsn;
         this.synopsis = synopsis;
         this.bill = bill;
+    }
+
+    public MovieDesc(String movieName, String ibsn, String synopsis, String price) {
+        this.movieName = movieName;
+        this.ibsn = ibsn;
+        this.synopsis = synopsis;
+        this.bill = new Bill(movieName, new BigInteger(price));
     }
 
     public String toString(IClientBox box) throws RemoteException {
