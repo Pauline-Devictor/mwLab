@@ -42,7 +42,7 @@ public class Main {
             switch (choice) {
                 case "1" -> {
                     System.out.println("Now let's see the catalog !");
-                    System.out.println(ivodService.viewCatalog(myBox));
+                    System.out.println(ivodService.viewCatalog());
                 }
                 case "2" -> {
                     System.out.println("And now let's try to rent a movie ! Enter the ISBN of the movie :");

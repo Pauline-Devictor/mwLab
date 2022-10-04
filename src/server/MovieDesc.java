@@ -27,10 +27,6 @@ public class MovieDesc implements Serializable {
         this.bill = new Bill(movieName, new BigInteger(price));
     }
 
-    public String toString(IClientBox box) throws RemoteException {
-        return toString();
-    }
-
     @Override
     public String toString(){
         return "\nMovieDesc{" +

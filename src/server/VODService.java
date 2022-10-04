@@ -37,10 +37,7 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         return instance;
     }
 
-    public List<MovieDesc> viewCatalog(IClientBox box) throws RemoteException {
-        for (MovieDesc movie: catalog) {
-            System.out.println(movie.toString(box));
-        }
+    public List<MovieDesc> viewCatalog() throws RemoteException {
         return catalog;
     }
 

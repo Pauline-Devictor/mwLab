@@ -18,12 +18,6 @@ public class MovieDescExtended extends MovieDesc{
         this.teaser = teaser.getBytes();
     }
 
-    public String toString(IClientBox box) throws RemoteException {
-        box.stream(teaser);
-        return "\nMovieDesc{" +
-                "movieName='" + movieName + '\'' +
-                "}";
-    }
     @Override
     public String toString(){
         return "\nMovieDesc{" +
