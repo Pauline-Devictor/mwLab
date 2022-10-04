@@ -36,6 +36,12 @@ public class MovieDesc implements Serializable {
         return "\nMovieDesc{" +
                 "movieName='" + movieName + '\'' +
                 ", ibsn='" + ibsn + '\'' +
+                "}";
+    }
+    public String toStringDetails() throws RemoteException {
+        return "\nMovieDesc{" +
+                "movieName='" + movieName + '\'' +
+                ", ibsn='" + ibsn + '\'' +
                 ", synopsis='" + synopsis + '\'' +
                 "}";
     }

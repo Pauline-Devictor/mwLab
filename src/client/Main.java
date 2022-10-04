@@ -39,31 +39,37 @@ public class Main {
         while(!stop){
             System.out.println("Do you want to see the catalog (1), to rent a movie (2), to add a movie (3), or to quit (0) ?");
             String choice = scanner.nextLine();
-            if (choice.equals("1")) {
-                System.out.println("Now let's see the catalog !");
-                System.out.println(ivodService.viewCatalog(myBox));
-            } else if (choice.equals("2")) {
-                System.out.println("And now let's try to rent a movie ! Enter the ISBN of the movie :");
-                String isbn = scanner.nextLine();
-                //String isbn = "14325426235324-2132";
-                System.out.println(ivodService.playmovie(isbn, myBox));
-            } else if (choice.equals("3")) {
-                System.out.println("Please enter the name of the movie");
-                String name = scanner.nextLine();
-                System.out.println("Please enter the isbn of the movie");
-                String isbn = scanner.nextLine();
-                System.out.println("Please enter the synopsis of the movie");
-                String synopsis = scanner.nextLine();
-                System.out.println("Please enter the price of the movie");
-                String price = scanner.nextLine();
-                ivodService.addmovie(name, isbn,synopsis, price);
-            } else if (choice.equals("0")) {
-                stop = true;
+            switch (choice) {
+                case "1" -> {
+                    System.out.println("Now let's see the catalog !");
+                    System.out.println(ivodService.viewCatalog(myBox));
+                }
+                case "2" -> {
+                    System.out.println("And now let's try to rent a movie ! Enter the ISBN of the movie :");
+                    String isbn = scanner.nextLine();
+                    //String isbn = "14325426235324-2132";
+                    watchDetails(ivodService, clientBox, isbn);
+                    System.out.println("Here is the movie :");
+                    watchMovie(ivodService, clientBox, isbn);
+                }
+                case "3" -> {
+                    System.out.println("Please enter the name of the movie");
+                    String name = scanner.nextLine();
+                    System.out.println("Please enter the isbn of the movie");
+                    String isbn = scanner.nextLine();
+                    System.out.println("Please enter the synopsis of the movie");
+                    String synopsis = scanner.nextLine();
+                    System.out.println("Please enter the price of the movie");
+                    String price = scanner.nextLine();
+                    ivodService.addmovie(name, isbn, synopsis, price);
+                }
+                case "0" -> stop = true;
             }
         }
 
         reg.unbind("ClientBox");
         System.out.println("End of the client connection");
+        return;
     }
 
     private static IVODService connection(IConnection connection) {
@@ -71,14 +77,14 @@ public class Main {
         while(true) {
             String choice = scanner.nextLine();
             if (choice.equals("1")) {
-                signin(connection);
+                return signin(connection);
             } else if (choice.equals("2")) {
                 return login(connection);
             }
         }
     }
 
-    private static void signin(IConnection connection){
+    private static IVODService signin(IConnection connection){
         boolean signedIn = false;
         while (!signedIn){
             System.out.println("Please enter your mail");
@@ -91,7 +97,7 @@ public class Main {
                 System.out.println(signInFailed.getMessage());
             }
         }
-        connection(connection);
+        return connection(connection);
     }
 
     private static IVODService login(IConnection connection){
@@ -110,4 +116,30 @@ public class Main {
         return ivodService;
     }
 
+    private static void watchDetails(IVODService ivodService, IClientBox myBox, String isbn) throws RemoteException, InvalidIsbnException {
+        System.out.println("Do you want to see the movie details ? Yes(1) or No(0)");
+        String details = scanner.nextLine();
+        if (details.equals("1")) {
+            try{
+                ivodService.getMovieDetails(isbn, myBox);
+            }
+            catch (InvalidIsbnException e){
+                System.out.println(e.getMessage());
+            }
+        }
+        else if (details.equals("0")) {
+            System.out.println("Ok, let's go !");
+        }
+        else {
+            System.out.println("Wrong input, try again");
+        }
+    }
+
+    private static void watchMovie(IVODService ivodService, IClientBox myBox, String isbn) throws RemoteException, InvalidIsbnException {
+        try {
+            ivodService.playmovie(isbn, myBox);
+        }catch (InvalidIsbnException e){
+            System.out.println(e.getMessage());
+        }
+    }
 }

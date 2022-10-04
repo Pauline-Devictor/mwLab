@@ -14,7 +14,7 @@ public class CSVManager {
         try
         {
         //parsing a CSV file into BufferedReader class constructor
-            BufferedReader br = new BufferedReader(new FileReader("./src/server/ClientData.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("./src/Database/ClientData.csv"));
             while ((line = br.readLine()) != null)
             {
                 String[] client = line.split(",");
@@ -32,7 +32,7 @@ public class CSVManager {
         try
         {
             //parsing a CSV file into BufferedReader class constructor
-            BufferedReader br = new BufferedReader(new FileReader("./src/server/MovieData.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("./src/Database/MovieData.csv"));
             while ((line = br.readLine()) != null)
             {
                 String[] movie = line.split(",");
@@ -49,7 +49,7 @@ public class CSVManager {
 
     public void writeClientData(Client client) {
         try {
-            FileWriter csvWriter = new FileWriter("./src/server/ClientData.csv", true);
+            FileWriter csvWriter = new FileWriter("./src/Database/ClientData.csv", true);
             csvWriter.append(client.getmail());
             csvWriter.append(",");
             csvWriter.append(client.getpwd());
@@ -64,7 +64,7 @@ public class CSVManager {
 
     public void writeMovieData(MovieDesc movie) {
         try {
-            FileWriter csvWriter = new FileWriter("./src/server/MovieData.csv", true);
+            FileWriter csvWriter = new FileWriter("./src/Database/MovieData.csv", true);
             csvWriter.append(movie.getMovieName());
             csvWriter.append(",");
             csvWriter.append(movie.getIbsn());

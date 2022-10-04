@@ -10,8 +10,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class VODService extends UnicastRemoteObject implements IVODService {
+
+    Random r = new Random();
     List<MovieDesc> catalog = new ArrayList<>();
     private static VODService instance = null;
     public VODService(int numport) throws RemoteException {
@@ -44,7 +47,7 @@ public class VODService extends UnicastRemoteObject implements IVODService {
     synchronized public Bill playmovie(String isbn, IClientBox box) throws InvalidIsbnException, RemoteException {
         for (MovieDesc m: catalog) {
             if(m.getIbsn().equals(isbn)) {
-                byte[] chunk = {1,2,3,4,5,'a', 'b', 'c', 'd', 'e',1, 'a', 2, 'b', 3}; //provisoire, pour tester
+                byte[] chunk = {1,2,3,4,5,'a', 'b', 'c', 'd', 'e',1, 'a', 2, 'b', 3}; //Simulation de la lecture du fichier
                 for(int i =0;i<3;i++) {
                     int finalI = i;
                     new Thread(() -> {
@@ -68,5 +71,26 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         MovieDesc newMovie = new MovieDesc(name, isbn, synopsis, new Bill(name, new BigInteger(price)));
         addMovie(newMovie);
         return true;
+    }
+
+    @Override
+    public void getMovieDetails(String isbn, IClientBox box) throws RemoteException, InvalidIsbnException {
+        for (MovieDesc m: catalog) {
+            if(m.getIbsn().equals(isbn)) {
+                box.printInfos(m.toStringDetails());
+                if (m instanceof MovieDescExtended) {
+                    int launchTeaser = r.nextInt(2);
+                    if(launchTeaser == 1) {
+                        box.printInfos("You're lucky today : let's see the teaser");
+                        box.stream(((MovieDescExtended) m).teaser);
+                    }
+                    else {
+                        box.printInfos("You're not lucky today : no teaser for you");
+                    }
+                }
+                return;
+            }
+        }
+        throw new InvalidIsbnException("Movie not found with isbn : "+isbn);
     }
 }
