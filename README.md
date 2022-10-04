@@ -1,14 +1,16 @@
 # Middleware Lab
 
 ## Auteurs
-DEVICTOR Pauline
-PARIS Floriane
+- DEVICTOR Pauline
+- PARIS Floriane
 
 ## Lancer le projet
 - Lancez le server.Main.main() côté serveur puis le client.Main.main() côté client
 - Rentrez le chiffre correspondant à l'action souhaitée 
 - Vous avez le choix de créer un (ou plusieurs) comptes ou de vous connecter
 - Une fois connecté, vous avez le choix de voir le catalogue, voir un film ou ajouter un film
+- En selectionnant un film, vous avez le choix de voir les détails du film avant ou pas
+- Si vous choisissez de voir les détails du film, le serveur décide aléatoirement (Une chance sur deux) de vous montrer le teaser du film
 
 ## Explications du projet
 - Dans le package Database nous avons des fichiers MovieData.csv et ClientData.csv afin de stocker les informations sur les comptes clients et les films ajoutés, les informations restent donc disponibles même après le redémarrage du serveur.
