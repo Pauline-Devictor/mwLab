@@ -74,7 +74,6 @@ public class Main {
 
         reg.unbind("ClientBox");
         System.out.println("End of the client connection");
-        return;
     }
 
     private static IVODService connection(IConnection connection) {
@@ -121,6 +120,14 @@ public class Main {
         return ivodService;
     }
 
+    /**
+     * Watch movie details like Synopsis and if there's one the Teaser
+     * @param ivodService
+     * @param myBox
+     * @param isbn
+     * @throws RemoteException
+     * @throws InvalidIsbnException
+     */
     private static void watchDetails(IVODService ivodService, IClientBox myBox, String isbn) throws RemoteException, InvalidIsbnException {
         System.out.println("Do you want to see the movie details ? Yes(1) or No(0)");
         String details = scanner.nextLine();

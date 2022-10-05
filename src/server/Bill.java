@@ -5,7 +5,7 @@ import java.math.BigInteger;
 
 public class Bill implements Serializable {
     String movieName;
-    BigInteger outrageousPrice; //(<--it mays not be that big)
+    BigInteger outrageousPrice; //(<--it mays not be that big but we choose to make it like that)
 
     public Bill(String movieName, BigInteger outrageousPrice) {
         this.movieName = movieName;

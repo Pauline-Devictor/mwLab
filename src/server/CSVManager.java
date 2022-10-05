@@ -10,6 +10,7 @@ public class CSVManager {
     public CSVManager() {
     }
 
+    //Get Clients Datas from Database and add the list to clientList in Connection
     public void readClientData(IConnection connection) {
         String line;
         try
@@ -28,6 +29,7 @@ public class CSVManager {
         }
     }
 
+    //Get Movies Datas from Database and add the list to ivodService
     public void readMovieData(IVODService ivodService) {
         String line;
         try
@@ -50,6 +52,7 @@ public class CSVManager {
         }
     }
 
+    //For new client, we add their infos in the Database
     public void writeClientData(Client client) {
         try {
             FileWriter csvWriter = new FileWriter("./src/Database/ClientData.csv", true);
@@ -65,6 +68,7 @@ public class CSVManager {
         }
     }
 
+    //For new movies, we add their infos in the Database
     public void writeMovieData(MovieDesc movie) {
         try {
             FileWriter csvWriter = new FileWriter("./src/Database/MovieData.csv", true);

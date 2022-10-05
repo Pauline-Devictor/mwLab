@@ -35,6 +35,7 @@ public class Connection extends UnicastRemoteObject implements IConnection {
             }
         }
         Client c = new Client(mail,pwd);
+        //we add the new client to the list and the "Database"
         clientlist.add(c);
         Main.csvManager.writeClientData(c);
         return true;

@@ -30,6 +30,11 @@ public class ClientBox extends UnicastRemoteObject implements IClientBox, Serial
         System.out.println();
     }
 
+    /**
+     * Print Infos from the server
+     * @param details
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public void printInfos(String details) throws java.rmi.RemoteException{
         System.out.println(details);

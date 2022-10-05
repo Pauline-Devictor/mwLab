@@ -12,7 +12,7 @@ public class MovieDesc implements Serializable {
     String synopsis;
     Bill bill;
 
-
+    //If a Bill is given
     public MovieDesc(String movieName, String isbn, String synopsis, Bill bill) throws InvalidIsbnException {
         this.movieName = movieName;
         long count = isbn.chars().filter(ch -> ch == '-').count();
@@ -23,7 +23,7 @@ public class MovieDesc implements Serializable {
         this.synopsis = synopsis;
         this.bill = bill;
     }
-
+    //If we give a price instead of the Bill
     public MovieDesc(String movieName, String isbn, String synopsis, String price) throws InvalidIsbnException {
         this.movieName = movieName;
         long count = isbn.chars().filter(ch -> ch == '-').count();
@@ -42,6 +42,7 @@ public class MovieDesc implements Serializable {
                 ", isbn='" + isbn + '\'' +
                 "}";
     }
+    //To print when Client ask for movie details
     public String toStringDetails() throws RemoteException {
         return "\nMovieDesc{" +
                 "movieName='" + movieName + '\'' +
