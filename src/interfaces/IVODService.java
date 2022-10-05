@@ -13,6 +13,6 @@ public interface IVODService extends Remote {
     Bill playmovie(String isbn, IClientBox box) throws java.rmi.RemoteException, InvalidIsbnException;
     boolean addmovie(String name, String isbn, String synopsis, String price) throws java.rmi.RemoteException, InvalidIsbnException;
     boolean addmovie(String name, String isbn, String synopsis, String price, String teaser) throws java.rmi.RemoteException, InvalidIsbnException;
-    public void initMovie(MovieDesc movie) throws java.rmi.RemoteException;
-    public void getMovieDetails(String isbn, IClientBox box) throws RemoteException, InvalidIsbnException;
+    void initMovie(MovieDesc movie) throws java.rmi.RemoteException;
+    void getMovieDetails(String isbn, IClientBox box) throws RemoteException, InvalidIsbnException;
 }

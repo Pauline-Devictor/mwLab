@@ -4,7 +4,6 @@ import exceptionHelper.InvalidIsbnException;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.rmi.RemoteException;
 
 public class MovieDesc implements Serializable {
     String movieName;
@@ -43,7 +42,7 @@ public class MovieDesc implements Serializable {
                 "}";
     }
     //To print when Client ask for movie details
-    public String toStringDetails() throws RemoteException {
+    public String toStringDetails() {
         return "\nMovieDesc{" +
                 "movieName='" + movieName + '\'' +
                 ", isbn='" + isbn + '\'' +

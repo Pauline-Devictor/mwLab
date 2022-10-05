@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class Main {
     public static IClientBox clientBox;
     static Scanner scanner = new Scanner(System.in);
-    public static void main(String[] args) throws NotBoundException, RemoteException, SignInFailed, MalformedURLException, InvalidCredentialsException, InvalidIsbnException {
+    public static void main(String[] args) throws NotBoundException, RemoteException, MalformedURLException, InvalidIsbnException {
         //distance
        /* Registry reg = LocateRegistry.getRegistry("192.168.90.117", 6542);
         IConnection connection= (IConnection)reg.lookup("Connection");*/
@@ -30,7 +30,6 @@ public class Main {
 
         IVODService ivodService = connection(connection);
 
-        IClientBox myBox = new ClientBox();
         Registry reg = LocateRegistry.createRegistry(2002);
 
         clientBox = ClientBox.getInstance(1003);
@@ -120,15 +119,8 @@ public class Main {
         return ivodService;
     }
 
-    /**
-     * Watch movie details like Synopsis and if there's one the Teaser
-     * @param ivodService
-     * @param myBox
-     * @param isbn
-     * @throws RemoteException
-     * @throws InvalidIsbnException
-     */
-    private static void watchDetails(IVODService ivodService, IClientBox myBox, String isbn) throws RemoteException, InvalidIsbnException {
+    // Watch movie details like Synopsis and if there's one, the Teaser
+    private static void watchDetails(IVODService ivodService, IClientBox myBox, String isbn) throws RemoteException {
         System.out.println("Do you want to see the movie details ? Yes(1) or No(0)");
         String details = scanner.nextLine();
         if (details.equals("1")) {
@@ -147,7 +139,7 @@ public class Main {
         }
     }
 
-    private static void watchMovie(IVODService ivodService, IClientBox myBox, String isbn) throws RemoteException, InvalidIsbnException {
+    private static void watchMovie(IVODService ivodService, IClientBox myBox, String isbn) throws RemoteException {
         try {
             ivodService.playmovie(isbn, myBox);
         }catch (InvalidIsbnException e){
